@@ -36,6 +36,7 @@
 - 기존 서비스명과 식별 가능한 더미 개인정보 제거
 - Firebase 프로젝트 `board-with-ai-agent` 배포 완료
 - AI Agent 기반 리포트 생성 흐름은 점진적으로 추가 예정
+- PostgreSQL/Supabase 확장을 가정한 데이터 구조 초안 작성
 
 ## AI Agent Extension
 
@@ -54,6 +55,10 @@ AI Agent는 기존 코드 분석, 기능 요구사항 정리, API 응답 구조 
 멘탈 웰니스 서비스의 상담 운영 화면을 가정하고, 상담사가 사용자의 상태 변화를 빠르게 파악한 뒤 AI가 생성한 요약과 케어 플랜을 검토할 수 있는 제품 흐름을 실험합니다.
 
 이 프로젝트는 프론트엔드 화면 구현 경험을 기반으로, AI Agent가 생성한 정보를 실제 사용자가 이해할 수 있는 화면과 API 흐름으로 연결하는 방법을 보여주기 위한 포트폴리오입니다.
+
+## Data Schema
+
+- [Data Schema Draft](./docs/schema.md)
 
 ## Getting Started
 
