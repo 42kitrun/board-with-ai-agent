@@ -1,5 +1,5 @@
 {
-  "name": "amine_user_board",
+  "name": "board-with-ai-agent",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {

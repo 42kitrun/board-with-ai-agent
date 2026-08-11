@@ -1,10 +1,10 @@
 import styles from "../styles/userinfo.module.css";
 
 const userInfo = {
-  nickname: "아미타민",
+  nickname: "사용자 A",
   gender: "M",
   age: 29,
-  phoneNumber: "01051256854",
+  phoneNumber: "01000000000",
   registrationDate: "2024.09.18",
 };
 
