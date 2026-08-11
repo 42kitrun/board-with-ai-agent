@@ -43,6 +43,17 @@
   box-shadow: none;
 }
 
+.feedbackMessage {
+  margin: 0 20px 0.25rem 0;
+  padding: 0.4rem 0.6rem;
+  background-color: #fff3bf;
+  color: #5c3c00;
+  border: 1px solid #ffe066;
+  border-radius: 4px;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
 .contentWrapper {
   height: 100%;
   display: flex;

@@ -97,6 +97,8 @@ export default function HealthReport() {
 
   const [isAiSummaryLoading, setIsAiSummaryLoading] = useState(false);
 
+  const [feedbackMessage, setFeedbackMessage] = useState("");
+
   const popupRef = useRef<HTMLDivElement | null>(null);
 
   const aiModalRef = useRef<HTMLDivElement | null>(null);
@@ -105,8 +107,21 @@ export default function HealthReport() {
   useEffect(() => {
     if (selectedReport) {
       setEditorContent(selectedReport.content);
+      setFeedbackMessage("");
     }
   }, [selectedReport]);
+
+  useEffect(() => {
+    if (!feedbackMessage) return;
+
+    const timerId = window.setTimeout(() => {
+      setFeedbackMessage("");
+    }, 3000);
+
+    return () => {
+      window.clearTimeout(timerId);
+    };
+  }, [feedbackMessage]);
 
   //useCallback
   const handleSave = useCallback(() => {
@@ -189,6 +204,7 @@ export default function HealthReport() {
 
     setEditorContent((prev) => `${prev.trimEnd()}\n${aiSummaryText}`);
     closeAiModal();
+    showFeedback("AI 요약 초안을 리포트에 반영했습니다.");
   };
 
   // 모달 외부 클릭 감지
@@ -231,7 +247,7 @@ export default function HealthReport() {
   }, [aiSummary]);
 
   const showFeedback = (message: string) => {
-    // Snackbar 구현 로직
+    setFeedbackMessage(message);
   };
 
   const formatDate = (date: Date) => {
@@ -253,6 +269,9 @@ export default function HealthReport() {
           {isAiSummaryLoading ? "생성 중..." : "AI 요약 생성"}
         </button>
       </div>
+      {feedbackMessage && (
+        <div className={styles.feedbackMessage}>{feedbackMessage}</div>
+      )}
       <div className={styles.contentWrapper}>
         <div className={styles.reportList}>
           {reports.map((report) => (
