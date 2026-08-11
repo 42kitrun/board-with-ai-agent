@@ -170,6 +170,27 @@ export default function HealthReport() {
     setAiSummary(null);
   };
 
+  const applyAiSummaryToReport = () => {
+    if (!aiSummary) return;
+
+    const aiSummaryText = [
+      "",
+      "[AI 요약 초안]",
+      "",
+      `핵심 요약: ${aiSummary.summary}`,
+      "",
+      `상태 해석: ${aiSummary.interpretation}`,
+      "",
+      "추천 케어 플랜:",
+      ...aiSummary.carePlan.map((plan, index) => `${index + 1}. ${plan}`),
+      "",
+      `상담사 확인 메모: ${aiSummary.counselorNote}`,
+    ].join("\n");
+
+    setEditorContent((prev) => `${prev.trimEnd()}\n${aiSummaryText}`);
+    closeAiModal();
+  };
+
   // 모달 외부 클릭 감지
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
@@ -321,6 +342,15 @@ export default function HealthReport() {
             <div className={styles.aiSummarySection}>
               <h4>상담사 확인 메모</h4>
               <p>{aiSummary.counselorNote}</p>
+            </div>
+            <div className={styles.aiModalActions}>
+              <button
+                type="button"
+                className={styles.applyAiSummaryButton}
+                onClick={applyAiSummaryToReport}
+              >
+                리포트에 반영
+              </button>
             </div>
           </div>
         </div>

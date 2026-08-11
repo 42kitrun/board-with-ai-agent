@@ -237,6 +237,28 @@
   margin-top: 0.35rem;
 }
 
+.aiModalActions {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 1rem;
+  border-top: 1px solid #e9ecef;
+}
+
+.applyAiSummaryButton {
+  padding: 0.55rem 0.9rem;
+  background-color: #d946ef;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 700;
+  box-shadow: var(--button-shadow);
+}
+
+.applyAiSummaryButton:hover {
+  background-color: #b517d4;
+}
+
 .popupButtonGroup {
   display: flex;
   justify-content: center;
