@@ -2,6 +2,10 @@
 
 강의를 참고하며 직접 작성한 Next.js 헬스케어 대시보드 UI를 기반으로, 상담 리포트와 케어 플랜 생성 흐름을 AI Agent 활용 방식으로 확장하는 포트폴리오 프로젝트입니다.
 
+## Live Demo
+
+- Firebase Hosting: https://board-with-ai-agent.web.app
+
 ## Overview
 
 이 프로젝트의 기본 대시보드 코드는 Next.js, React, TypeScript 학습 과정에서 직접 구현했습니다. 사용자 정보, 상담 코멘트, 설문 결과, 목표 달성률, 피로도 그래프, 건강 리포트 편집 화면을 컴포넌트 단위로 구성했습니다.
@@ -25,6 +29,13 @@
 - 피로도 추이 그래프
 - 건강 리포트 조회, 수정, 삭제 UI
 - Firebase Hosting 배포 설정
+
+## Current Status
+
+- 기본 대시보드 화면 로컬 확인 완료
+- 기존 서비스명과 식별 가능한 더미 개인정보 제거
+- Firebase 프로젝트 `board-with-ai-agent` 배포 완료
+- AI Agent 기반 리포트 생성 흐름은 점진적으로 추가 예정
 
 ## AI Agent Extension
 
@@ -59,6 +70,15 @@ npm run dev
 npm run dev
 npm run build
 npm run start
+```
+
+## Deployment
+
+Firebase Hosting의 Next.js framework support를 사용합니다.
+
+```bash
+firebase experiments:enable webframeworks
+firebase deploy --only hosting --project board-with-ai-agent
 ```
 
 ## Repository
