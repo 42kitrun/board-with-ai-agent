@@ -113,6 +113,11 @@ export default function HealthReport() {
     setShowDeletePopup(true);
   }, []);
 
+  const handleGenerateAiSummary = useCallback(() => {
+    if (!selectedReport) return;
+    showFeedback("AI 요약 생성 기능을 준비 중입니다.");
+  }, [selectedReport]);
+
   const confirmDelete = useCallback(() => {
     if (!selectedReport) return;
 
@@ -158,7 +163,17 @@ export default function HealthReport() {
 
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>Health Report</h2>
+      <div className={styles.header}>
+        <h2 className={styles.title}>Health Report</h2>
+        <button
+          type="button"
+          className={styles.aiSummaryButton}
+          onClick={handleGenerateAiSummary}
+          disabled={!selectedReport}
+        >
+          AI 요약 생성
+        </button>
+      </div>
       <div className={styles.contentWrapper}>
         <div className={styles.reportList}>
           {reports.map((report) => (
