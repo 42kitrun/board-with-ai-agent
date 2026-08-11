@@ -169,6 +169,74 @@
   text-align: center;
 }
 
+.aiSummaryModal {
+  width: min(560px, calc(100vw - 2rem));
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  color: #212529;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.2);
+}
+
+.aiModalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.aiModalHeader h3 {
+  margin: 0;
+  color: #b517d4;
+  font-size: 1.25rem;
+}
+
+.aiModalCloseButton {
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #f1f3f5;
+  color: #495057;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.aiModalCloseButton:hover {
+  background-color: #dee2e6;
+}
+
+.aiSummarySection {
+  padding: 0.9rem 0;
+  border-top: 1px solid #e9ecef;
+}
+
+.aiSummarySection h4 {
+  margin: 0 0 0.45rem;
+  font-size: 0.95rem;
+  color: #343a40;
+}
+
+.aiSummarySection p {
+  margin: 0;
+  color: #495057;
+  line-height: 1.55;
+}
+
+.aiSummarySection ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: #495057;
+  line-height: 1.55;
+}
+
+.aiSummarySection li + li {
+  margin-top: 0.35rem;
+}
+
 .popupButtonGroup {
   display: flex;
   justify-content: center;
