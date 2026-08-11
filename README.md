@@ -1,78 +1,68 @@
-# Board
-![Next.js](https://img.shields.io/badge/-Next.js-blue?logo=nextjs&logoColor=white) ![React](https://img.shields.io/badge/-React-blue?logo=react&logoColor=white) ![TypeScript](https://img.shields.io/badge/-TypeScript-blue?logo=typescript&logoColor=white) ![CSS3](https://img.shields.io/badge/-CSS3-1572B6?logo=css3&logoColor=white)
+# Board with AI Agent
 
+강의를 참고하며 직접 작성한 Next.js 헬스케어 대시보드 UI를 기반으로, 상담 리포트와 케어 플랜 생성 흐름을 AI Agent 활용 방식으로 확장하는 포트폴리오 프로젝트입니다.
 
-   
+## Overview
 
-## 📝 설명
+이 프로젝트의 기본 대시보드 코드는 Next.js, React, TypeScript 학습 과정에서 직접 구현했습니다. 사용자 정보, 상담 코멘트, 설문 결과, 목표 달성률, 피로도 그래프, 건강 리포트 편집 화면을 컴포넌트 단위로 구성했습니다.
 
-Board는 Next.js, React, TypeScript를 사용해 개발된 모던하고 기능이 풍부한 웹 애플리케이션입니다. React의 컴포넌트 기반 구조와 TypeScript의 타입 안정성을 활용해 깔끔하고 유지보수하기 좋은 코드를 제공합니다. Next.js는 서버 사이드 렌더링을 지원해 뛰어난 성능과 SEO 최적화를 보장합니다. 현재 프로젝트 설명은 간단하지만 다양한 기능 확장과 향후 확장성을 위한 탄탄한 기반을 가진 플랫폼임을 의미합니다.
+현재 레포는 이 기본 구현을 바탕으로 멘탈 웰니스 서비스에서 필요한 상담 운영 화면, 리포트 요약, 추천 케어 플랜 흐름을 제품 관점에서 확장하기 위한 작업 공간입니다.
 
-## 🛠️ 기술 스택
+## Tech Stack
 
-- next.js Next.js  
-- ⚛️ React  
-- 📜 TypeScript  
+- Next.js
+- React
+- TypeScript
+- CSS Modules
+- Firebase Hosting
 
-## 📦 주요 의존성
+## Implemented Features
 
-```
-next: ^15.2.1
-react: ^19.0.0
-react-dom: ^19.0.0
-```
+- 사용자 기본 정보 대시보드
+- 상담 코멘트 목록, 작성, 수정, 삭제 UI
+- 설문 결과 시각화
+- 목표 달성률 비교 그래프
+- 피로도 추이 그래프
+- 건강 리포트 조회, 수정, 삭제 UI
+- Firebase Hosting 배포 설정
 
-## 📁 프로젝트 구조
+## AI Agent Extension
 
-```
-.
-├── app
-│   ├── layout.tsx
-│   └── page.tsx
-├── components
-│   ├── comments.tsx
-│   ├── fatigue.tsx
-│   ├── goal.tsx
-│   ├── header.tsx
-│   ├── navigation.tsx
-│   ├── report.tsx
-│   ├── survey.tsx
-│   ├── userboard.tsx
-│   └── userinfo.tsx
-├── firebase.json
-├── package.json
-├── styles
-│   ├── comments.module.css
-│   ├── dashboardhead.module.css
-│   ├── fatigue.module.css
-│   ├── global.css
-│   ├── goal.module.css
-│   ├── layout.module.css
-│   ├── navigation.module.css
-│   ├── report.module.css
-│   ├── survey.module.css
-│   ├── userboard.module.css
-│   └── userinfo.module.css
-└── tsconfig.json
+기본 UI 구현 위에 AI Agent를 활용한 상담 운영 흐름을 확장합니다.
+
+- 심리/건강 설문 결과를 리포트 입력 데이터로 구조화
+- AI 요약, 해석, 추천, 케어 플랜 응답 형식 설계
+- Next.js API route 기반 mock 리포트 생성 흐름 추가
+- 상담사가 확인할 수 있는 리포트 요약 UI 개선
+- PostgreSQL/Supabase를 가정한 데이터 구조 문서화
+
+AI Agent는 기존 코드 분석, 기능 요구사항 정리, API 응답 구조 설계, 구현 초안 작성, README 문서화 보조에 활용합니다. 기본 대시보드 UI 구현과 최종 코드 검토는 직접 수행합니다.
+
+## Project Context
+
+멘탈 웰니스 서비스의 상담 운영 화면을 가정하고, 상담사가 사용자의 상태 변화를 빠르게 파악한 뒤 AI가 생성한 요약과 케어 플랜을 검토할 수 있는 제품 흐름을 실험합니다.
+
+이 프로젝트는 프론트엔드 화면 구현 경험을 기반으로, AI Agent가 생성한 정보를 실제 사용자가 이해할 수 있는 화면과 API 흐름으로 연결하는 방법을 보여주기 위한 포트폴리오입니다.
+
+## Getting Started
+
+```bash
+npm install
+npm run dev
 ```
 
-## 🛠️ 개발 환경 설정
+브라우저에서 `http://localhost:3000`으로 접속합니다.
 
-### Node.js/JavaScript 설정
+## Scripts
 
-1. Node.js(v18 이상 권장) 설치  
-2. 의존성 설치: `npm install` 또는 `yarn install`  
-3. 개발 서버 시작: `npm run dev` (또는 `yarn dev`)  
+```bash
+npm run dev
+npm run build
+npm run start
+```
 
-## 👥 기여 방법
+## Repository
 
-기여를 환영합니다! 방법은 다음과 같습니다:
-
-1. 저장소를 **Fork** 합니다  
-2. 자신의 저장소를 **Clone** 합니다: `git clone https://github.com/42kitrun/Board.git`  
-3. 새로운 브랜치 생성: `git checkout -b feature/your-feature`  
-4. 변경사항 커밋: `git commit -am '기능 추가'`  
-5. 브랜치에 푸시: `git push origin feature/your-feature`  
-6. Pull Request를 엽니다  
-
-코드 스타일 가이드에 맞도록 작성하며, 가능한 경우 테스트를 포함해 주세요.
+```bash
+git clone https://github.com/42kitrun/board-with-ai-agent.git
+```
