@@ -237,6 +237,10 @@
   line-height: 1.55;
 }
 
+.aiSummaryText {
+  white-space: pre-line;
+}
+
 .aiSummarySection ul {
   margin: 0;
   padding-left: 1.2rem;

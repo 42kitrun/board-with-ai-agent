@@ -12,8 +12,8 @@ interface HealthReport {
 interface AiSummary {
   summary: string;
   interpretation: string;
-  carePlan: string[];
-  counselorNote: string;
+  recommendations: string[];
+  reviewNote: string;
 }
 
 export default function HealthReport() {
@@ -152,7 +152,7 @@ export default function HealthReport() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ content: selectedReport.content }),
+        body: JSON.stringify({ content: editorContent }),
       });
 
       if (!response.ok) {
@@ -166,7 +166,7 @@ export default function HealthReport() {
     } finally {
       setIsAiSummaryLoading(false);
     }
-  }, [selectedReport]);
+  }, [selectedReport, editorContent]);
 
   const confirmDelete = useCallback(() => {
     if (!selectedReport) return;
@@ -192,14 +192,17 @@ export default function HealthReport() {
       "",
       "[AI 요약 초안]",
       "",
-      `핵심 요약: ${aiSummary.summary}`,
+      "핵심 요약:",
+      aiSummary.summary,
       "",
       `상태 해석: ${aiSummary.interpretation}`,
       "",
-      "추천 케어 플랜:",
-      ...aiSummary.carePlan.map((plan, index) => `${index + 1}. ${plan}`),
+      "관리 제안:",
+      ...aiSummary.recommendations.map(
+        (recommendation, index) => `${index + 1}. ${recommendation}`
+      ),
       "",
-      `상담사 확인 메모: ${aiSummary.counselorNote}`,
+      `검토 메모: ${aiSummary.reviewNote}`,
     ].join("\n");
 
     setEditorContent((prev) => `${prev.trimEnd()}\n${aiSummaryText}`);
@@ -344,23 +347,23 @@ export default function HealthReport() {
             </div>
             <div className={styles.aiSummarySection}>
               <h4>핵심 요약</h4>
-              <p>{aiSummary.summary}</p>
+              <p className={styles.aiSummaryText}>{aiSummary.summary}</p>
             </div>
             <div className={styles.aiSummarySection}>
               <h4>상태 해석</h4>
               <p>{aiSummary.interpretation}</p>
             </div>
             <div className={styles.aiSummarySection}>
-              <h4>추천 케어 플랜</h4>
+              <h4>관리 제안</h4>
               <ul>
-                {aiSummary.carePlan.map((plan) => (
-                  <li key={plan}>{plan}</li>
+                {aiSummary.recommendations.map((recommendation) => (
+                  <li key={recommendation}>{recommendation}</li>
                 ))}
               </ul>
             </div>
             <div className={styles.aiSummarySection}>
-              <h4>상담사 확인 메모</h4>
-              <p>{aiSummary.counselorNote}</p>
+              <h4>검토 메모</h4>
+              <p>{aiSummary.reviewNote}</p>
             </div>
             <div className={styles.aiModalActions}>
               <button
