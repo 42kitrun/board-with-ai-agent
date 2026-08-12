@@ -1,24 +1,25 @@
 # Data Schema Draft
 
-이 문서는 헬스케어 대시보드를 멘탈 웰니스 상담 운영 흐름으로 확장할 때 사용할 수 있는 PostgreSQL/Supabase 기준 데이터 구조 초안입니다.
+이 문서는 헬스케어 대시보드의 건강 리포트 요약 흐름을 확장할 때 사용할 수 있는 PostgreSQL/Supabase 기준 데이터 구조 초안입니다.
 
-현재 앱은 더미 데이터와 mock API로 동작하지만, 실제 제품에서는 `user -> survey response -> AI report -> counselor review -> care plan` 흐름으로 저장될 수 있습니다.
+현재 앱은 더미 데이터와 API 요약 기능으로 동작하지만, 실제 제품에서는 `user -> survey response -> health report -> AI summary -> review` 흐름으로 저장될 수 있습니다.
 
 ## Core Flow
 
 ```text
 users
   -> survey_responses
+  -> health_reports
   -> ai_reports
-  -> counselor_comments
-  -> care_plan_tasks
+  -> review_comments
+  -> action_items
 ```
 
 ## Tables
 
 ### users
 
-상담 대상 사용자 기본 정보를 저장합니다.
+사용자 기본 정보를 저장합니다.
 
 ```sql
 create table users (
@@ -53,7 +54,7 @@ create table survey_responses (
 
 ### health_reports
 
-상담사가 편집하는 리포트 본문을 저장합니다.
+검토자가 편집하는 리포트 본문을 저장합니다.
 
 ```sql
 create table health_reports (
@@ -68,7 +69,7 @@ create table health_reports (
 
 ### ai_reports
 
-AI Agent가 생성한 요약, 해석, 추천 케어 플랜 초안을 저장합니다.
+AI가 생성한 요약, 해석, 관리 제안 초안을 저장합니다.
 
 ```sql
 create table ai_reports (
@@ -78,20 +79,20 @@ create table ai_reports (
   source_content text not null,
   summary text not null,
   interpretation text not null,
-  care_plan jsonb not null default '[]'::jsonb,
-  counselor_note text,
+  recommendations jsonb not null default '[]'::jsonb,
+  review_note text,
   status text not null default 'draft',
   created_at timestamptz not null default now(),
   applied_at timestamptz
 );
 ```
 
-### counselor_comments
+### review_comments
 
-상담사가 사용자 상태 변화나 상담 메모를 남기는 테이블입니다.
+검토자가 사용자 상태 변화나 리포트 메모를 남기는 테이블입니다.
 
 ```sql
-create table counselor_comments (
+create table review_comments (
   id uuid primary key default gen_random_uuid(),
   user_id uuid not null references users(id) on delete cascade,
   writer_name text not null,
@@ -101,12 +102,12 @@ create table counselor_comments (
 );
 ```
 
-### care_plan_tasks
+### action_items
 
-AI 리포트 또는 상담사가 제안한 케어 플랜을 실행 가능한 task 단위로 관리합니다.
+AI 리포트 또는 검토자가 제안한 관리 항목을 실행 가능한 task 단위로 관리합니다.
 
 ```sql
-create table care_plan_tasks (
+create table action_items (
   id uuid primary key default gen_random_uuid(),
   user_id uuid not null references users(id) on delete cascade,
   ai_report_id uuid references ai_reports(id) on delete set null,
@@ -157,9 +158,9 @@ Response:
 {
   "summary": "핵심 요약",
   "interpretation": "상태 해석",
-  "carePlan": ["추천 케어 플랜"],
-  "counselorNote": "상담사 확인 메모"
+  "recommendations": ["관리 제안"],
+  "reviewNote": "검토 메모"
 }
 ```
 
-실제 DB 연동 시에는 `health_reports.content`를 입력으로 사용하고, 생성 결과를 `ai_reports`에 draft 상태로 저장한 뒤 상담사가 검토하여 `health_reports.content`에 반영하는 흐름으로 확장할 수 있습니다.
+실제 DB 연동 시에는 `health_reports.content`를 입력으로 사용하고, 생성 결과를 `ai_reports`에 draft 상태로 저장한 뒤 검토자가 확인하여 `health_reports.content`에 반영하는 흐름으로 확장할 수 있습니다.
