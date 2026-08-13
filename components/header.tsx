@@ -1,15 +1,16 @@
 import styles from "../styles/dashboardhead.module.css";
 
-// Props 타입 정의
-interface DashBoardHead {
+interface DashBoardHeadProps {
   title: string;
 }
 
-export default function DashBoardHead({ title }) {
+export default function DashBoardHead({ title }: DashBoardHeadProps) {
   return (
     <header className={styles.header}>
-      <div className={styles.title}>{title}</div>
-      <button className={styles.logoutButton}>로그아웃</button>
+      <h1 className={styles.title}>{title}</h1>
+      <button type="button" className={styles.logoutButton}>
+        로그아웃
+      </button>
     </header>
   );
 }

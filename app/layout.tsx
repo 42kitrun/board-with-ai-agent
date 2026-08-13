@@ -18,9 +18,9 @@ export default function RootLayout({
       <body className={styles.body}>
         <DashBoardHead title="CareBoard AI" /> {/* 상단 고정 헤더 */}
         <div className={styles.container}>
-          <nav className={styles.nav}>
+          <aside className={styles.nav}>
             <Navigation /> {/* 헤더 아래 왼쪽 고정 네비게이션 */}
-          </nav>
+          </aside>
           <main className={styles.main}>{children}</main>
         </div>
       </body>
