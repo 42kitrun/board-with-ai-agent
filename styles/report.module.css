@@ -69,15 +69,21 @@
 }
 
 .listItem {
+  width: 100%;
   padding: 1rem;
   cursor: pointer;
   background-color: white;
+  border: none;
   transition: background-color 0.2s;
   color: black;
+  display: block;
+  font: inherit;
   font-weight: bold;
+  text-align: left;
 }
 
-.listItem:hover {
+.listItem:hover,
+.listItem:focus-visible {
   background-color: var(--primary-bright-300);
 }
 

@@ -25,16 +25,22 @@
 }
 
 .commentItem {
+  width: 100%;
   background: white;
+  border: none;
   border-radius: 8px;
   padding: 1rem;
   margin-bottom: 1rem;
   cursor: pointer;
+  display: block;
+  font: inherit;
+  text-align: left;
   transition: transform 0.2s;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.commentItem:hover {
+.commentItem:hover,
+.commentItem:focus-visible {
   transform: translateX(5px);
 }
 
@@ -126,23 +132,20 @@
   border: none;
 }
 
-.modalActions span {
-  width: 40%;
-}
-
-.modalActions button:first-child {
+.deleteAction {
+  margin-right: auto;
   background-color: white;
   color: red;
   font-weight: bold;
 }
 
-.modalActions button:first-child:hover {
+.deleteAction:hover {
   background-color: red;
   color: white;
   font-weight: bold;
 }
 
-.modalActions button:nth-child(3) {
+.modalActions button:nth-child(2) {
   background-color: var(--button-bg-color);
   color: var(--button-text-color);
   box-shadow: var(--button-shadow);

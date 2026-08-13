@@ -273,23 +273,27 @@ export default function HealthReport() {
         </button>
       </div>
       {feedbackMessage && (
-        <div className={styles.feedbackMessage}>{feedbackMessage}</div>
+        <div className={styles.feedbackMessage} role="status" aria-live="polite">
+          {feedbackMessage}
+        </div>
       )}
       <div className={styles.contentWrapper}>
-        <div className={styles.reportList}>
+        <div className={styles.reportList} aria-label="건강 리포트 목록">
           {reports.map((report) => (
-            <div
+            <button
+              type="button"
               key={report.date.toISOString()}
               className={`${styles.listItem} ${
                 selectedReport?.date === report.date ? styles.selected : ""
               }`}
               onClick={() => setSelectedReport(report)}
+              aria-pressed={selectedReport?.date === report.date}
             >
               <div>{formatDate(report.date)}</div>
               <div className={styles.modifiedDate}>
                 변경일자 {formatDate(report.lastModified)}
               </div>
-            </div>
+            </button>
           ))}
         </div>
 
@@ -301,12 +305,21 @@ export default function HealthReport() {
                 value={editorContent}
                 onChange={(e) => setEditorContent(e.target.value)}
                 placeholder="텍스트를 입력하세요..."
+                aria-label="건강 리포트 본문"
               />
               <div className={styles.buttonGroup}>
-                <button onClick={handleSave} className={styles.saveButton}>
+                <button
+                  type="button"
+                  onClick={handleSave}
+                  className={styles.saveButton}
+                >
                   저장
                 </button>
-                <button onClick={handleDelete} className={styles.deleteButton}>
+                <button
+                  type="button"
+                  onClick={handleDelete}
+                  className={styles.deleteButton}
+                >
                   삭제
                 </button>
               </div>
@@ -318,13 +331,27 @@ export default function HealthReport() {
       </div>
       {showDeletePopup && (
         <div className={styles.popupOverlay}>
-          <div ref={popupRef} className={styles.popup}>
-            <p>삭제하시겠습니까?</p>
+          <div
+            ref={popupRef}
+            className={styles.popup}
+            role="alertdialog"
+            aria-modal="true"
+            aria-labelledby="delete-report-title"
+          >
+            <p id="delete-report-title">삭제하시겠습니까?</p>
             <div className={styles.popupButtonGroup}>
-              <button onClick={confirmDelete} className={styles.popupYesButton}>
+              <button
+                type="button"
+                onClick={confirmDelete}
+                className={styles.popupYesButton}
+              >
                 YES
               </button>
-              <button onClick={closePopup} className={styles.popupNoButton}>
+              <button
+                type="button"
+                onClick={closePopup}
+                className={styles.popupNoButton}
+              >
                 NO
               </button>
             </div>
@@ -333,9 +360,15 @@ export default function HealthReport() {
       )}
       {aiSummary && (
         <div className={styles.popupOverlay}>
-          <div ref={aiModalRef} className={styles.aiSummaryModal}>
+          <div
+            ref={aiModalRef}
+            className={styles.aiSummaryModal}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="ai-summary-title"
+          >
             <div className={styles.aiModalHeader}>
-              <h3>AI Summary</h3>
+              <h3 id="ai-summary-title">AI Summary</h3>
               <button
                 type="button"
                 className={styles.aiModalCloseButton}

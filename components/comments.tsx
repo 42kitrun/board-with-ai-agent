@@ -26,17 +26,33 @@ const Modal = ({ comment, onClose, onDelete, onEdit }: ModalProps) => {
 
   return (
     <div className={styles.modalBackdrop} onClick={onClose}>
-      <div className={styles.modalContent} onClick={handleModalClick}>
+      <div
+        className={styles.modalContent}
+        onClick={handleModalClick}
+        role="dialog"
+        aria-modal="true"
+        aria-label="코멘트 수정"
+      >
         <textarea
           value={editedMessage}
           onChange={(e) => setEditedMessage(e.target.value)}
           className={styles.editArea}
+          aria-label="코멘트 내용 수정"
         />
         <div className={styles.modalActions}>
-          <button onClick={onDelete}>Delete</button>
-          <span></span>
-          <button onClick={() => onEdit(editedMessage)}>Save</button>
-          <button onClick={onClose}>Cancel</button>
+          <button
+            type="button"
+            className={styles.deleteAction}
+            onClick={onDelete}
+          >
+            Delete
+          </button>
+          <button type="button" onClick={() => onEdit(editedMessage)}>
+            Save
+          </button>
+          <button type="button" onClick={onClose}>
+            Cancel
+          </button>
         </div>
       </div>
     </div>
@@ -136,17 +152,19 @@ export default function Comments() {
           <p className={styles.emptyMessage}>댓글이 없습니다.</p>
         ) : (
           comments.map((comment) => (
-            <div
+            <button
+              type="button"
               key={comment.id}
               className={styles.commentItem}
               onClick={() => setSelectedComment(comment)}
+              aria-label={`${comment.writer} 코멘트 수정`}
             >
               <p className={styles.commentText}>{comment.message}</p>
               <div className={styles.commentMeta}>
                 <span>{comment.writer}</span>
                 <span>{new Date(comment.writedatetime).toLocaleString()}</span>
               </div>
-            </div>
+            </button>
           ))
         )}
       </div>
@@ -157,6 +175,7 @@ export default function Comments() {
           onChange={(e) => setNewComment(e.target.value)}
           placeholder="Add Comments...."
           className={styles.textareaField}
+          aria-label="새 코멘트"
         />
         <button type="submit" className={styles.submitButton}>
           입력
